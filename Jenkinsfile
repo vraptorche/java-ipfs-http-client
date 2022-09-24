@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 checkout scm
-                sh 'mvn clean verify'
+                sh 'mvn clean verify -DskipTests'
             }
         }
         stage('Test') {
@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'mvn jar:jar deploy:deploy'
+                sh 'mvn jar:jar deploy:deploy -DskipTests'
             }
         }
     }
