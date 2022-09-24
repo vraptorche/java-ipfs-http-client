@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.ipfs</groupId>
-    <artifactId>java-ipfs-http-client</artifactId>
+	<groupId>com.github.ipfs</groupId>
+	<artifactId>java-ipfs-http-client</artifactId>
 	<version>v1.3.3</version>
 	<packaging>jar</packaging>
 
@@ -11,30 +11,30 @@
 	<url>https://github.com/ipfs/java-ipfs-http-client</url>
 
 	<issueManagement>
- 		<url>https://github.com/ipfs/java-ipfs-http-client/issues</url>
- 		<system>GitHub Issues</system>
- 	</issueManagement>
+		<url>https://github.com/ipfs/java-ipfs-http-client/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
 
- 	<scm>
- 		<url>https://github.com/ipfs/java-ipfs-http-client</url>
- 		<connection>scm:git:git://github.com/ipfs/java-ipfs-http-client.git</connection>
- 		<developerConnection>scm:git:git@github.com:ipfs/java-ipfs-http-client.git</developerConnection>
- 	</scm>
+	<scm>
+		<url>https://github.com/ipfs/java-ipfs-http-client</url>
+		<connection>scm:git:git://github.com/ipfs/java-ipfs-http-client.git</connection>
+		<developerConnection>scm:git:git@github.com:ipfs/java-ipfs-http-client.git</developerConnection>
+	</scm>
 
- 	<licenses>
- 		<license>
- 			<name>MIT License</name>
- 			<url>https://github.com/ipfs/java-ipfs-http-client/blob/master/LICENSE</url>
- 			<distribution>repo</distribution>
- 		</license>
- 	</licenses>
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://github.com/ipfs/java-ipfs-http-client/blob/master/LICENSE</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <version.junit>4.13.2</version.junit>
-        <version.hamcrest>2.2</version.hamcrest>
-        <version.multiaddr>v1.4.6</version.multiaddr>
+		<version.junit>4.13.2</version.junit>
+		<version.hamcrest>2.2</version.hamcrest>
+		<version.multiaddr>v1.4.6</version.multiaddr>
 	</properties>
 
 	<repositories>
@@ -45,23 +45,28 @@
 	</repositories>
 
 	<dependencies>
-        <dependency>
-            <groupId>com.github.multiformats</groupId>
-            <artifactId>java-multiaddr</artifactId>
-            <version>${version.multiaddr}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${version.junit}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <version>${version.hamcrest}</version>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.multiformats</groupId>
+			<artifactId>java-multiaddr</artifactId>
+			<version>${version.multiaddr}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${version.junit}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
+			<version>${version.hamcrest}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -69,10 +74,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.10.0</version>
 				<configuration>
-					<source>11</source>
-					<target>11</target>
+					<release>17</release>
 				</configuration>
 			</plugin>
 			<plugin>
