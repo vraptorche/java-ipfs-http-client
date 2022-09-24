@@ -23,7 +23,7 @@ public class RecursiveAddTest {
         Path base = Files.createTempDirectory("test");
         Files.write(base.resolve("index.html"), "<html></html>".getBytes());
         Path js = base.resolve("js");
-        js.toFile().mkdirs();
+        final boolean mkdirs = js.toFile().mkdirs();
         Files.write(js.resolve("func.js"), "function() {console.log('Hey');}".getBytes());
 
         List<MerkleNode> add = ipfs.add(new NamedStreamable.FileWrapper(base.toFile()));
