@@ -17,12 +17,12 @@ import static io.ipfs.api.cbor.CborConstants.*;
  * </p>
  */
 public class CborType {
-    private final int m_major;
-    private final int m_additional;
+    private final int major;
+    private final int additional;
 
     private CborType(int major, int additional) {
-        m_major = major;
-        m_additional = additional;
+        this.major = major;
+        this.additional = additional;
     }
 
     /**
@@ -33,26 +33,17 @@ public class CborType {
      * @throws IllegalArgumentException in case the given major type is not supported.
      */
     public static String getName(int mt) {
-        switch (mt) {
-            case TYPE_ARRAY:
-                return "array";
-            case TYPE_BYTE_STRING:
-                return "byte string";
-            case TYPE_FLOAT_SIMPLE:
-                return "float/simple value";
-            case TYPE_MAP:
-                return "map";
-            case TYPE_NEGATIVE_INTEGER:
-                return "negative integer";
-            case TYPE_TAG:
-                return "tag";
-            case TYPE_TEXT_STRING:
-                return "text string";
-            case TYPE_UNSIGNED_INTEGER:
-                return "unsigned integer";
-            default:
-                throw new IllegalArgumentException("Invalid major type: " + mt);
-        }
+	    return switch (mt) {
+		    case TYPE_ARRAY -> "array";
+		    case TYPE_BYTE_STRING -> "byte string";
+		    case TYPE_FLOAT_SIMPLE -> "float/simple value";
+		    case TYPE_MAP -> "map";
+		    case TYPE_NEGATIVE_INTEGER -> "negative integer";
+		    case TYPE_TAG -> "tag";
+		    case TYPE_TEXT_STRING -> "text string";
+		    case TYPE_UNSIGNED_INTEGER -> "unsigned integer";
+		    default -> throw new IllegalArgumentException("Invalid major type: " + mt);
+	    };
     }
 
     /**
@@ -75,29 +66,29 @@ public class CborType {
         }
 
         CborType other = (CborType) obj;
-        return (m_major == other.m_major) && (m_additional == other.m_additional);
+        return (major == other.major) && (additional == other.additional);
     }
 
     /**
      * @return the additional information of this type, as integer value from [0..31].
      */
     public int getAdditionalInfo() {
-        return m_additional;
+        return additional;
     }
 
     /**
      * @return the major type, as integer value from [0..7].
      */
     public int getMajorType() {
-        return m_major;
+        return major;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + m_additional;
-        result = prime * result + m_major;
+        result = prime * result + additional;
+        result = prime * result + major;
         return result;
     }
 
@@ -106,8 +97,8 @@ public class CborType {
      *         <code>false</code> if only definite-length payloads are allowed.
      */
     public boolean isBreakAllowed() {
-        return m_major == TYPE_ARRAY || m_major == TYPE_BYTE_STRING || m_major == TYPE_MAP
-                || m_major == TYPE_TEXT_STRING;
+        return major == TYPE_ARRAY || major == TYPE_BYTE_STRING || major == TYPE_MAP
+                || major == TYPE_TEXT_STRING;
     }
 
     /**
@@ -121,7 +112,7 @@ public class CborType {
         if (other == null) {
             throw new IllegalArgumentException("Parameter cannot be null!");
         }
-        return m_major == other.m_major;
+        return major == other.major;
     }
 
     /**
@@ -131,13 +122,13 @@ public class CborType {
      * @return <code>true</code> if the given byte value represents the same major type as this {@link CborType}, <code>false</code> otherwise.
      */
     public boolean isEqualType(int encoded) {
-        return m_major == ((encoded & 0xff) >>> 5);
+        return major == ((encoded & 0xff) >>> 5);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getName(m_major)).append('(').append(m_additional).append(')');
+        sb.append(getName(major)).append('(').append(additional).append(')');
         return sb.toString();
     }
 }

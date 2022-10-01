@@ -1,11 +1,15 @@
 package io.ipfs.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.*;
 
 import java.lang.reflect.*;
 
 public class JSONParser
 {
+
+    private static ObjectMapper mapper = new ObjectMapper();
     private static char skipSpaces(String json, int[] pos)
     {
         while (true)
