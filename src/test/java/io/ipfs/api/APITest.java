@@ -12,8 +12,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -245,7 +246,6 @@ public class APITest {
 		MerkleNode child1 = ipfs.add(new NamedStreamable.ByteArrayWrapper("some data".getBytes())).get(0);
 		Multihash hashChild1 = child1.hash;
 
-
 		CborObject.CborMerkleLink root1 = new CborObject.CborMerkleLink(hashChild1);
 		MerkleNode root1Res = ipfs.block.put(Collections.singletonList(root1.toByteArray()), Optional.of("cbor")).get(0);
 
@@ -271,7 +271,6 @@ public class APITest {
 	public void rawLeafNodePinUpdate() throws IOException {
 		MerkleNode child1 = ipfs.block.put("some data".getBytes(), Optional.of("raw"));
 		Multihash hashChild1 = child1.hash;
-
 
 		CborObject.CborMerkleLink root1 = new CborObject.CborMerkleLink(hashChild1);
 		MerkleNode root1Res = ipfs.block.put(Collections.singletonList(root1.toByteArray()), Optional.of("cbor")).get(0);
@@ -419,8 +418,8 @@ public class APITest {
 				ipfs.pubsub.sub(topic, res::add, t -> t.printStackTrace());
 			} catch (IOException e) {
 				throw new RuntimeException(e);
-			}
-		}).start();
+
+		}}).start();
 
 		int nMessages = 100;
 		for (int i = 1; i < nMessages; ) {
